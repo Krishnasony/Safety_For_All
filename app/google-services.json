@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "86076880886",
+    "firebase_url": "https://safetyforall-fc472.firebaseio.com",
+    "project_id": "safetyforall-fc472",
+    "storage_bucket": "safetyforall-fc472.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86076880886:android:2427ebad247a614d",
+        "android_client_info": {
+          "package_name": "doorhelper.safety_for_all"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86076880886-hqja70qoggtni2esdqq65bgsk8od6gis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "doorhelper.safety_for_all",
+            "certificate_hash": "7080197886597eb5796e522a5a4d8ecb5b12180c"
+          }
+        },
+        {
+          "client_id": "86076880886-g1kpe3lqu2innbof8i0a4qtvs2otqlce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTOLA04YNFMNdjsUu-150bWcCii3uTGLM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86076880886-g1kpe3lqu2innbof8i0a4qtvs2otqlce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#555555"
+    tools:context="doorhelper.safety_for_all.SafetyActivity">
+
+    <TextView
+        android:id="@+id/ex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="24*7 Support"
+        android:textColor="#ff9944"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="35dp"
+        />
+    <TextView
+        android:id="@+id/contact"
+
+        android:layout_below="@id/ex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="+91-7223061806"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        />
+    <TextView
+        android:id="@+id/email"
+        android:layout_below="@id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="info@doorhelper.in"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        />
+    <TextView
+        android:id="@+id/website"
+        android:layout_below="@id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="www.doorhelper.in"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"/>
+
+</RelativeLayout>

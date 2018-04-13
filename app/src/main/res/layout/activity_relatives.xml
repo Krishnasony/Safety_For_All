@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="doorhelper.safety_for_all.Relatives"
+    android:background="#555555"
+    android:orientation="vertical">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Relative 1"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:textSize="25dp"
+    android:textStyle="bold"
+    />
+    <EditText
+        android:id="@+id/r1_name"
+        android:background="@drawable/box_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Name"
+        android:textStyle="italic" />
+    <EditText
+        android:id="@+id/r1_mob"
+        android:background="@drawable/box_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Contact No"
+        android:textStyle="italic" />
+    <EditText
+        android:id="@+id/r1_email"
+        android:background="@drawable/box_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:hint="Email"
+        android:paddingLeft="10dp"
+        android:textStyle="italic" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Relative 2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/r2_name"
+        android:background="@drawable/box_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Name"
+        android:textStyle="italic" />
+    <EditText
+        android:id="@+id/r2_mob"
+        android:background="@drawable/box_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:hint="Contact No"
+        android:paddingLeft="10dp"
+        android:textStyle="italic" />
+    <EditText
+        android:id="@+id/r2_email"
+        android:background="@drawable/box_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:hint="Email"
+        android:paddingLeft="10dp"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:id="@+id/saverelative"
+            android:text="SAVE"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/round_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:id="@+id/skipbutton"
+            android:text="SKIP"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/round_button"/>
+    </LinearLayout>
+
+</LinearLayout>

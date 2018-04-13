@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#555555"
+    tools:context="doorhelper.safety_for_all.HelpActivity">
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How To Use"
+        android:textColor="#ff9944"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="35dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 1: Install the application"
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 2: Register Yourself"
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 3: Sign In using email"
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 4: Fill Relatives Details"
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 5: Change Password when required"
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 6: Click Oon HELP button when you are in trouble."
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step 7: Log Out "
+        android:textSize="25dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="* Contact Us in case of any problem in using the application"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:textColor="#fff"
+        />
+
+</LinearLayout>
