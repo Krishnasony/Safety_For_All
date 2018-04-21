@@ -15,12 +15,31 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerlayout;
     private ActionBarDrawerToggle mToggle;
     ImageButton imageButton;
+    String num1,num2,username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +49,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        String myMesaage ="hello ...";
 //        smsManager.sendTextMessage(sendTo,null,myMesaage,null,null);
         imageButton = findViewById(R.id.imagebutton);
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                username = dataSnapshot.child("name").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendSmsMessage();
+
+
+                FirebaseDatabase.getInstance().getReference().child("relative").child(FirebaseAuth.getInstance()
+                .getCurrentUser().getUid().toString()).child("firstrelative").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        num1 = dataSnapshot.child("mobile").getValue().toString();
+                        FirebaseDatabase.getInstance().getReference().child("relative").child(FirebaseAuth.getInstance()
+                                .getCurrentUser().getUid().toString()).child("secondrelative").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                num2 = dataSnapshot.child("mobile").getValue().toString();
+                                sendSmsMessage(num1,num2);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+
             }
         });
 
@@ -46,19 +114,72 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void sendSmsMessage() {
-        String phoneNo="7992295457";
-        String message = "hhedhshas";
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo,null,message,null ,null);
-            Toast.makeText(this, "Sms sent!", Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e){
-            Toast.makeText(this, "Sms Failed, Please Try Again!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+    private void sendSmsMessage( String number1 , String number2) {
 
-        }
+        // Instantiate the cache
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+
+// Set up the network to use HttpURLConnection as the HTTP client.
+        Network network = new BasicNetwork(new HurlStack());
+
+        String url ="http://happystore.16mb.com/sihapi/SmsApi.php";
+
+        RequestQueue requestQueue = new RequestQueue(cache,network);
+
+        requestQueue.start();
+
+        StringRequest stringRequest  = new StringRequest(StringRequest.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> param = new HashMap<>();
+                param.put("mobileno",num1);
+                param.put("message","Your Friend "+username+" is in Trouble");
+                return  param;
+            }
+        };
+
+
+        StringRequest stringRequest1  = new StringRequest(StringRequest.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> param = new HashMap<>();
+                param.put("mobileno",num2);
+                param.put("message","Your Friend "+username+" is in Trouble");
+                return  param;
+            }
+        };
+
+
+        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest1);
 
     }
 

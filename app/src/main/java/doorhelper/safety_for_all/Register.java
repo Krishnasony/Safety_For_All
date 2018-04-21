@@ -4,9 +4,16 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +31,8 @@ public class Register extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mref;
     Button verify;
+    RadioGroup radioGroup;
+   // String[] city= {"Bhopal", "Indore", "Gwalior", "jabalpur"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +41,15 @@ public class Register extends AppCompatActivity {
         editTextname = findViewById(R.id.name);
         editTextemail = findViewById(R.id.email);
         editTextpassword= findViewById(R.id.password);
+        radioGroup=findViewById(R.id.rdg);
+       // m=findViewById(R.id.sdf);
         mDatabase = FirebaseDatabase.getInstance();
-        mref = mDatabase.getReference("users").push();
-
-
+        mref = mDatabase.getReference("users");
+       /* Spinner spinner= findViewById(R.id.city);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter aa= ArrayAdapter<this;
+        android.R.doorhelper.safety_for_all.R.id.action_bar_subtitle,city>;
+*/
         mAuth = FirebaseAuth.getInstance();
         editTextconfpass =findViewById(R.id.confirmpassword);
         verify.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +59,8 @@ public class Register extends AppCompatActivity {
                 final String password = editTextpassword.getText().toString().trim();
                 final String name = editTextname.getText().toString().trim();
                 final String confpasswd = editTextconfpass.getText().toString().trim();
+                String gender=radioGroup.toString();
+               // Toast.makeText(Register.this, , Toast.LENGTH_SHORT).show();
                 if (!password.equals(confpasswd)){
                     Toast.makeText(Register.this, "Password Mismatch?  Try again!", Toast.LENGTH_SHORT).show();
 
@@ -64,14 +80,18 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    mref = mDatabase.getReference("users").child(task.getResult().getUser().getUid());
+
                                     mref.child("name").setValue(name);
                                     mref.child("email").setValue(email);
                                     mref.child("password").setValue(password);
+                                    mref.child("gender").setValue(radioGroup);
                                     Toast.makeText(Register.this, "Register Successfully!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(Register.this, SignIn.class));
                                 } else {
 
                                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                        Toast.makeText(Register.this,""+task,Toast.LENGTH_LONG).show();
 
                                         Toast.makeText(getApplicationContext(), "You Are Already Registered!", Toast.LENGTH_LONG).show();
                                     } else {

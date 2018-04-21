@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +31,7 @@ public class Relatives extends AppCompatActivity {
         editText_mob = findViewById(R.id.r2_mob);
 
         mdatabase = FirebaseDatabase.getInstance();
-        mref = mdatabase.getReference("relative").push();
+        mref = mdatabase.getReference("relative").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         skip = findViewById(R.id.skipbutton);
         save = findViewById(R.id.saverelative);
         skip.setOnClickListener(new View.OnClickListener() {
