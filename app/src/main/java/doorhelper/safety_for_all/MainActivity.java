@@ -27,6 +27,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,18 +51,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        smsManager.sendTextMessage(sendTo,null,myMesaage,null,null);
         imageButton = findViewById(R.id.imagebutton);
 
-        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null)
+        {
+            FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                username = dataSnapshot.child("name").getValue().toString();
-            }
+                    username = dataSnapshot.child("name").getValue().toString();
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });  
+        }
+        
+        
 
 
 
@@ -69,36 +76,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
+                if(user!=null)
+                {
+                    FirebaseDatabase.getInstance().getReference().child("relative").child(FirebaseAuth.getInstance()
+                            .getCurrentUser().getUid().toString()).child("firstrelative").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                FirebaseDatabase.getInstance().getReference().child("relative").child(FirebaseAuth.getInstance()
-                .getCurrentUser().getUid().toString()).child("firstrelative").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                            num1 = dataSnapshot.child("mobile").getValue().toString();
+                            FirebaseDatabase.getInstance().getReference().child("relative").child(FirebaseAuth.getInstance()
+                                    .getCurrentUser().getUid().toString()).child("secondrelative").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        num1 = dataSnapshot.child("mobile").getValue().toString();
-                        FirebaseDatabase.getInstance().getReference().child("relative").child(FirebaseAuth.getInstance()
-                                .getCurrentUser().getUid().toString()).child("secondrelative").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                    num2 = dataSnapshot.child("mobile").getValue().toString();
+                                    sendSmsMessage(num1,num2);
+                                }
 
-                                num2 = dataSnapshot.child("mobile").getValue().toString();
-                                sendSmsMessage(num1,num2);
-                            }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
 
-                            }
-                        });
+                        }
 
-                    }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
 
-                    }
-                });
-
+                }
+                else 
+                {
+                    Toast.makeText(MainActivity.this, "You are Not Login.... Login To Send Alert", Toast.LENGTH_SHORT).show();
+                }
+               
 
 
 
@@ -133,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(String response) {
 
 
-                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
@@ -158,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(String response) {
 
 
-                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Alert Sent", Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
